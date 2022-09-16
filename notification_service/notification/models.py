@@ -4,10 +4,14 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class MailingList(models.Model):
-    date_time_start = models.DateTimeField(verbose_name='дата и время')
+    date_time_start = models.DateTimeField(verbose_name='дата и время начала')
     message_text = models.TextField(verbose_name='текст сообщение')
     tag = models.CharField(max_length=100, db_index=True, verbose_name='тег')
-    date_time_finish = models.DateTimeField(verbose_name='дата и время')
+    date_time_finish = models.DateTimeField(
+        blank=True,
+        null=True,
+        verbose_name='дата и время окончания'
+        )
 
     class Meta:
         verbose_name = 'рассылка'
