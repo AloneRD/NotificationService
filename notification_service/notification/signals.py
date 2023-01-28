@@ -1,6 +1,8 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
 from notification.models import MailingList, Client, Message
+from .tasks import send_message
 
 
 @receiver(post_save, sender=MailingList)
@@ -14,3 +16,4 @@ def create_message(sender, instance, created, **kwargs):
         ) for client in clients
     ]
     Message.objects.bulk_create(messages)
+    send_message.apply_async()
