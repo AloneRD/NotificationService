@@ -7,3 +7,4 @@ class NotificationConfig(AppConfig):
 
     def ready(self):
         from notification import signals
+#dfgdfgd
